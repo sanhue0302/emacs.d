@@ -110,6 +110,9 @@
 (global-set-key (kbd "C-c c e") 'mc/edit-ends-of-lines)
 (global-set-key (kbd "C-c c a") 'mc/edit-beginnings-of-lines)
 
+;; open recent file list
+(global-unset-key (kbd "C-x C-r"))
+(global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
 (defun duplicate-line ()
   (interactive)
