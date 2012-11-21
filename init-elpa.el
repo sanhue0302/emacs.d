@@ -158,6 +158,8 @@ ARCHIVE is the string name of the package archive.")
 (require-package 'textile-mode)
 (require-package 'darcsum)
 (require-package 'pretty-mode)
+(require-package 'twittering-mode)
+(require-package 'undo-tree)
 
 ;; I maintain this chunk:
 (require-package 'ac-slime)
@@ -196,7 +198,5 @@ ARCHIVE is the string name of the package archive.")
 (require-package 'unfill)
 (require-package 'vc-darcs)
 (require-package 'whole-line-or-region)
-(require-package 'twittering-mode)
-(require-package 'undo-tree)
 
 (provide 'init-elpa)
