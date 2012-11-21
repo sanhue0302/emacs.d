@@ -242,5 +242,10 @@
         (sort-subr nil 'forward-line 'end-of-line nil nil
                    (lambda (s1 s2) (eq (random 2) 0)))))))
 
+;;----------------------------------------------------------------------------
+;; turn on/off truncate-lines
+;;----------------------------------------------------------------------------
+(global-set-key (kbd "C-x t") 'toggle-truncate-lines)
+
 
 (provide 'init-editing-utils)
