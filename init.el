@@ -74,7 +74,7 @@
 
 (require 'init-marmalade)
 (require 'init-misc)
-
+(require 'init-client)
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
