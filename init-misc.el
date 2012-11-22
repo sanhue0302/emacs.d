@@ -11,5 +11,7 @@
 
 (setq-default regex-tool-backend 'perl)
 
+;; Register files
+(set-register ?e '(file . "~/.emacs.d/init.el"))
 
 (provide 'init-misc)
