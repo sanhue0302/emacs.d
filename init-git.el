@@ -7,8 +7,8 @@
   (let ((current-prefix-arg t))
     (magit-status default-directory)))
 
-(global-set-key (kbd "C-x m") 'magit-status)
-(global-set-key (kbd "C-x M") 'magit-status-somedir)
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x G") 'magit-status-somedir)
 
 (when *is-a-mac*
   (add-hook 'magit-mode-hook (lambda () (local-unset-key [(meta h)]))))
