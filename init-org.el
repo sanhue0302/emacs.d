@@ -97,4 +97,13 @@
     (autoload 'omlg-grab-link "org-mac-link")
     (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link)))
 
+;; Remove empty LOGBOOK drawers on clock out
+(defun remove-empty-drawer-on-clock-out ()
+  (interactive)
+  (save-excursion
+    (beginning-of-line 0)
+    (org-remove-empty-drawer-at "LOGBOOK" (point))))
+
+(add-hook 'org-clock-out-hook 'remove-empty-drawer-on-clock-out 'append)
+
 (provide 'init-org)
