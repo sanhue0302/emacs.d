@@ -9,6 +9,10 @@
 (setq interpreter-mode-alist
       (cons '("python" . python-mode) interpreter-mode-alist))
 
+;; use homebrew's python
+(setq load-path
+      (append (list "/usr/local/share/python")
+              load-path))
 
 ;;----------------------------------------------------------------------------
 ;; On-the-fly syntax checking via flymake
