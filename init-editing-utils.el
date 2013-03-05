@@ -322,7 +322,7 @@ With arg N, insert N newlines."
 ;;----------------------------------------------------------------------------
 ;; turn on/off truncate-lines
 ;;----------------------------------------------------------------------------
-(global-set-key (kbd "C-x t") 'toggle-truncate-lines)
+(global-set-key (kbd "C-x T") 'toggle-truncate-lines)
 
 ;;----------------------------------------------------------------------------
 ;; Use shell-like backspace C-h, rebind help
