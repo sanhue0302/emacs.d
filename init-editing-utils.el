@@ -253,5 +253,9 @@
 (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
 (global-set-key (kbd "C-x /") 'help-command)
 
+;;----------------------------------------------------------------------------
+;; whitespace-cleanup
+;;----------------------------------------------------------------------------
+(global-set-key (kbd "C-x w") 'whitespace-cleanup)
 
 (provide 'init-editing-utils)
