@@ -160,6 +160,7 @@ ARCHIVE is the string name of the package archive.")
 (require-package 'pretty-mode)
 (require-package 'twittering-mode)
 (require-package 'undo-tree)
+(require-package 'auto-complete-clang)
 
 ;; I maintain this chunk:
 (require-package 'ac-slime)
