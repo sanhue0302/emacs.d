@@ -79,6 +79,7 @@
 (require 'init-haskell)
 (require 'init-ruby-mode)
 (require 'init-rails)
+(require 'init-objc)
 
 (require 'init-lisp)
 (require 'init-slime)
