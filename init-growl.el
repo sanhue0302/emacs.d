@@ -1,3 +1,5 @@
+(require-package 'todochiku)
+
 (require 'todochiku) ;; growl notifications when compilation finishes
 (setq todochiku-icons-directory (expand-file-name "~/.emacs.d/site-lisp/todochiku-icons"))
 
@@ -12,5 +14,9 @@ See https://github.com/alloy/terminal-notifier for more information.")
           (list "-title" title "-message" message "-activate" "org.gnu.Emacs")))
   (setq todochiku-command terminal-notifier-path))
 
+(defadvice todochiku-message (around check-for-helper activate)
+  "Suppress message attempts when the `todochiku-command' program is missing."
+  (when (file-exists-p todochiku-command)
+    ad-do-it))
 
 (provide 'init-growl)

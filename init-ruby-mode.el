@@ -1,11 +1,22 @@
-;; Currently loading ruby-mode and inf-ruby from the version bundled with rinari
-(setq interpreter-mode-alist
-      (cons '("ruby" . ruby-mode) interpreter-mode-alist))
+(require-package 'ruby-mode)
+(require-package 'flymake-ruby)
+(require-package 'rinari)
+(require-package 'ruby-compilation)
+(require-package 'inf-ruby)
+(require-package 'robe)
+(require-package 'yari)
+(require-package 'yaml-mode)
+(require-package 'haml-mode)
+(require-package 'mmm-mode)
+
 
 (eval-after-load 'rinari
   '(diminish 'rinari-minor-mode "Rin"))
 
-(add-auto-mode 'ruby-mode "\\.rb$" "Rakefile$" "\.rake$" "\.rxml$" "\.rjs$" ".irbrc$" "\.builder$" "\.ru$" "\.gemspec$" "Gemfile$")
+(add-auto-mode 'ruby-mode
+               "Rakefile\\'" "\\.rake\\'" "\.rxml\\'"
+               "\\.rjs\\'" ".irbrc\\'" "\.builder\\'" "\\.ru\\'"
+               "\\.gemspec\\'" "Gemfile\\'" "Kirkfile\\'")
 
 
 (autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
@@ -22,6 +33,16 @@
 ;; Ruby - flymake
 ;;----------------------------------------------------------------------------
 (add-hook 'ruby-mode-hook 'flymake-ruby-load)
+
+
+;;----------------------------------------------------------------------------
+;; Ruby - robe
+;;----------------------------------------------------------------------------
+(add-hook 'ruby-mode-hook 'robe-mode)
+(add-hook 'robe-mode-hook
+          (lambda ()
+            (add-to-list 'ac-sources 'ac-source-robe)
+            (setq completion-at-point-functions '(auto-complete))))
 
 
 ;;----------------------------------------------------------------------------
@@ -43,24 +64,29 @@
   (mmm-add-mode-ext-class mode "\\.r?html\\(\\.erb\\)?\\'" 'html-css)
   (mmm-add-mode-ext-class mode "\\.erb\\'" 'erb))
 
+(require-package 'tagedit)
+(eval-after-load "sgml-mode"
+  '(progn
+     (tagedit-add-paredit-like-keybindings)))
+
 (mmm-add-mode-ext-class 'html-erb-mode "\\.jst\\.ejs\\'" 'ejs)
 
-(add-to-list 'auto-mode-alist '("\\.r?html\\(\\.erb\\)?\\'" . html-erb-mode))
+(add-auto-mode 'html-erb-mode "\\.rhtml\\'" "\\.html\\.erb\\'")
 (add-to-list 'auto-mode-alist '("\\.jst\\.ejs\\'"  . html-erb-mode))
-(mmm-add-mode-ext-class 'yaml-mode "\\.yaml$" 'erb)
+(mmm-add-mode-ext-class 'yaml-mode "\\.yaml\\'" 'erb)
 
 (dolist (mode (list 'js-mode 'js2-mode 'js3-mode))
-  (mmm-add-mode-ext-class mode "\\.js\\.erb$" 'erb))
+  (mmm-add-mode-ext-class mode "\\.js\\.erb\\'" 'erb))
 
 
 ;;----------------------------------------------------------------------------
 ;; Ruby - my convention for heredocs containing SQL
 ;;----------------------------------------------------------------------------
-(eval-after-load 'mmm-mode
-  '(progn
-     (mmm-add-classes
-      '((ruby-heredoc-sql :submode sql-mode :front "<<-?end_sql.*\r?\n" :back "[ \t]*end_sql" :face mmm-code-submode-face)))
-     (mmm-add-mode-ext-class 'ruby-mode "\\.rb$" 'ruby-heredoc-sql)))
+;; (eval-after-load 'mmm-mode
+;;   '(progn
+;;      (mmm-add-classes
+;;       '((ruby-heredoc-sql :submode sql-mode :front "<<-?end_sql.*\r?\n" :back "[ \t]*end_sql" :face mmm-code-submode-face)))
+;;      (mmm-add-mode-ext-class 'ruby-mode "\\.rb\\'" 'ruby-heredoc-sql)))
 
 
 ;;----------------------------------------------------------------------------
@@ -75,12 +101,21 @@
 (add-hook 'ruby-mode-hook (lambda () (local-set-key [f6] 'recompile)))
 
 
+;;----------------------------------------------------------------------------
+;; Ruby - handy helpers
+;;----------------------------------------------------------------------------
 
-;;----------------------------------------------------------------------------
-;; Yaml
-;;----------------------------------------------------------------------------
-(autoload 'yaml-mode "yaml-mode" "Major mode for YAML source")
-(add-auto-mode 'yaml-mode "\\.ya?ml$")
+;; Borrowed from https://github.com/textmate/ruby.tmbundle/blob/master/Commands/Convert%20Ruby%20hash%20to%201_9%20syntax.tmCommand
+(defun sanityinc/ruby-toggle-hash-syntax (beg end)
+  "Toggle between ruby 1.8 and 1.9 hash styles."
+  (interactive "r")
+  (save-excursion
+    (goto-char beg)
+    (cond
+     ((save-excursion (search-forward "=>" end t))
+      (replace-regexp ":\\(\\w+\\) +=> +" "\\1: " nil beg end))
+     ((save-excursion (re-search-forward "\\w+:" end t))
+      (replace-regexp "\\(\\w+\\):\\( *\\(?:\"\\(?:\\\"\\|[^\"]\\)*\"\\|'\\(?:\\'\\|[^']\\)*'\\|\\w+([^)]*)\\|[^,]+\\)\\)" ":\\1 =>\\2" nil beg end)))))
 
 
 (provide 'init-ruby-mode)

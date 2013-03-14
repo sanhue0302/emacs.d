@@ -1,10 +1,12 @@
-;; -*- coding: utf-8 -*-
+;;; This file bootstraps the configuration, which is divided into
+;;; a number of other files.
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 
 ;;----------------------------------------------------------------------------
 ;; Which functionality to enable (use t or nil for true and false)
 ;;----------------------------------------------------------------------------
-(defconst *spell-check-support-enabled* nil)
+(defconst *spell-check-support-enabled* t)
 (defconst *is-a-mac* (eq system-type 'darwin))
 (defconst *is-carbon-emacs* (eq window-system 'mac))
 (defconst *is-cocoa-emacs* (and *is-a-mac* (eq window-system 'ns)))
@@ -13,13 +15,24 @@
 (defconst *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)))
 
 ;;----------------------------------------------------------------------------
-;; Load configs for specific features and modes
+;; Bootstrap config
 ;;----------------------------------------------------------------------------
 (require 'init-compat)
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
-(require 'init-elpa)
+(require 'init-elpa)      ;; Machinery for installing required packages
 (require 'init-exec-path) ;; Set up $PATH
+
+;;----------------------------------------------------------------------------
+;; Load configs for specific features and modes
+;;----------------------------------------------------------------------------
+
+(require-package 'wgrep)
+(require-package 'project-local-variables)
+(require-package 'diminish)
+(require-package 'scratch)
+(require-package 'mwe-log-commands)
+
 (require 'init-frame-hooks)
 (require 'init-xterm)
 (require 'init-themes)
@@ -79,6 +92,16 @@
 (require 'init-misc)
 (require 'init-client)
 
+;; Extra packages which don't require any configuration
+
+(require-package 'gnuplot)
+(require-package 'lua-mode)
+(require-package 'htmlize)
+(require-package 'dsvn)
+(when *is-a-mac*
+  (require-package 'osx-location))
+(require-package 'regex-tool)
+
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
 ;;----------------------------------------------------------------------------
@@ -91,7 +114,8 @@
 ;; Variables configured via the interactive 'customize' interface
 ;;----------------------------------------------------------------------------
 (setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 
 ;;----------------------------------------------------------------------------
@@ -107,5 +131,6 @@
 
 
 ;; Local Variables:
+;; coding: utf-8
 ;; no-byte-compile: t
 ;; End:

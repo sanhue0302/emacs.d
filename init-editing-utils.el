@@ -1,3 +1,6 @@
+(require-package 'unfill)
+(require-package 'whole-line-or-region)
+
 ;;----------------------------------------------------------------------------
 ;; Some basic preferences
 ;;----------------------------------------------------------------------------
@@ -7,6 +10,7 @@
  bookmark-default-file "~/.emacs.d/.bookmarks.el"
  buffers-menu-max-size 30
  case-fold-search t
+ column-number-mode t
  compilation-scroll-output t
  ediff-split-window-function 'split-window-horizontally
  ediff-window-setup-function 'ediff-setup-windows-plain
@@ -23,15 +27,24 @@
  truncate-partial-width-windows nil
  visible-bell t)
 
+(global-auto-revert-mode)
+(setq global-auto-revert-non-file-buffers t
+      auto-revert-verbose nil)
+
+;; But don't show trailing whitespace in SQLi, inf-ruby etc.
+(dolist (hook '(term-mode-hook comint-mode-hook compilation-mode-hook))
+  (add-hook hook
+   (lambda () (setq show-trailing-whitespace nil))))
+
 (transient-mark-mode t)
 
+(define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;;----------------------------------------------------------------------------
-;; Zap *up* to char is a more sensible default
+;; Zap *up* to char is a handy pair for zap-to-char
 ;;----------------------------------------------------------------------------
 (autoload 'zap-up-to-char "misc" "Kill up to, but not including ARGth occurrence of CHAR.")
-(global-set-key (kbd "M-z") 'zap-up-to-char)
-(global-set-key (kbd "M-Z") 'zap-to-char)
+(global-set-key (kbd "M-Z") 'zap-up-to-char)
 
 ;;----------------------------------------------------------------------------
 ;; Don't disable narrowing commands
@@ -43,30 +56,26 @@
 ;;----------------------------------------------------------------------------
 ;; Show matching parens
 ;;----------------------------------------------------------------------------
+(require-package 'mic-paren)
 (paren-activate)     ; activating mic-paren
 
 ;;----------------------------------------------------------------------------
 ;; Expand region
 ;;----------------------------------------------------------------------------
-(require 'expand-region)
+(require-package 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-;;----------------------------------------------------------------------------
-;; Autopair quotes and parentheses
-;;----------------------------------------------------------------------------
-(require 'autopair)
-(setq autopair-autowrap t)
-(autopair-global-mode t)
-
-(defun inhibit-autopair ()
-  "Prevent autopair from enabling in the current buffer."
-  (setq autopair-dont-activate t)
-  (autopair-mode -1))
 
 ;;----------------------------------------------------------------------------
 ;; Fix per-window memory of buffer point positions
 ;;----------------------------------------------------------------------------
+(require-package 'pointback)
 (global-pointback-mode)
+(defadvice skeleton-insert (before disable-pointback activate)
+  "Disable pointback when using skeleton functions like `sgml-tag'."
+  (when pointback-mode
+    (message "Disabling pointback.")
+    (pointback-mode -1)))
 
 
 ;;----------------------------------------------------------------------------
@@ -95,10 +104,13 @@
 (global-set-key (kbd "M-T") 'transpose-lines)
 (global-set-key (kbd "C-.") 'set-mark-command)
 (global-set-key (kbd "C-x C-.") 'pop-global-mark)
+
+(require-package 'ace-jump-mode)
 (global-set-key (kbd "C-;") 'ace-jump-mode)
 (global-set-key (kbd "C-:") 'ace-jump-word-mode)
 
 
+(require-package 'multiple-cursors)
 ;; multiple-cursors
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -142,12 +154,14 @@
 ;;----------------------------------------------------------------------------
 ;; Page break lines
 ;;----------------------------------------------------------------------------
+(require-package 'page-break-lines)
 (global-page-break-lines-mode)
 
 ;;----------------------------------------------------------------------------
 ;; Fill column indicator
 ;;----------------------------------------------------------------------------
 (when (> emacs-major-version 23)
+  (require-package 'fill-column-indicator)
   (defun sanityinc/prog-mode-fci-settings ()
     (turn-on-fci-mode)
     (when show-trailing-whitespace
@@ -184,6 +198,7 @@
 ;;----------------------------------------------------------------------------
 ;; Shift lines up and down with M-up and M-down
 ;;----------------------------------------------------------------------------
+(require-package 'move-text)
 (move-text-default-bindings)
 
 
@@ -191,6 +206,7 @@
 ;; Fix backward-up-list to understand quotes, see http://bit.ly/h7mdIL
 ;;----------------------------------------------------------------------------
 (defun backward-up-sexp (arg)
+  "Jump up to the start of the ARG'th enclosing sexp."
   (interactive "p")
   (let ((ppss (syntax-ppss)))
     (cond ((elt ppss 3)

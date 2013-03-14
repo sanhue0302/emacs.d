@@ -1,13 +1,19 @@
+(require-package 'elisp-slime-nav)
+(require-package 'lively)
+
+(require-package 'pretty-mode)
 (autoload 'turn-on-pretty-mode "pretty-mode")
 
 ;; ----------------------------------------------------------------------------
 ;; Paredit
 ;; ----------------------------------------------------------------------------
+(require-package 'paredit)
 (autoload 'enable-paredit-mode "paredit")
 
 
 (defun maybe-map-paredit-newline ()
-  (unless (or (eq major-mode 'inferior-emacs-lisp-mode) (minibufferp))
+  (unless (or (memq major-mode '(inferior-emacs-lisp-mode nrepl-mode))
+              (minibufferp))
     (local-set-key (kbd "RET") 'paredit-newline)))
 
 (add-hook 'paredit-mode-hook 'maybe-map-paredit-newline)
@@ -36,9 +42,6 @@
 
 ;; Compatibility with other modes
 
-(defadvice enable-paredit-mode (before disable-autopair activate)
-  (inhibit-autopair))
-
 (suspend-mode-during-cua-rect-selection 'paredit-mode)
 
 
@@ -47,7 +50,9 @@
 
 (defvar paredit-minibuffer-commands '(eval-expression
                                       pp-eval-expression
-                                      eval-expression-with-eldoc)
+                                      eval-expression-with-eldoc
+                                      ibuffer-do-eval
+                                      ibuffer-do-view-and-eval)
   "Interactive commands for which paredit should be enabled in the minibuffer.")
 
 (defun conditionally-enable-paredit-mode ()
@@ -71,24 +76,20 @@
 ;; Automatic byte compilation
 ;; ----------------------------------------------------------------------------
 
-(defun maybe-byte-compile ()
-  (when (and (eq major-mode 'emacs-lisp-mode)
-             buffer-file-name
-             (string-match "\\.el$" buffer-file-name)
-             (not (string-match "\\.dir-locals.el$" buffer-file-name)))
-    (save-excursion (byte-compile-file buffer-file-name))))
-
-
-(add-hook 'after-save-hook 'maybe-byte-compile)
-
+(require-package 'auto-compile)
+(auto-compile-on-save-mode 1)
+;; TODO: also use auto-compile-on-load-mode
+;; TODO: exclude .dir-locals.el
 
 ;; ----------------------------------------------------------------------------
 ;; Highlight current sexp
 ;; ----------------------------------------------------------------------------
 
+(require-package 'hl-sexp)
+
 ;; Prevent flickery behaviour due to hl-sexp-mode unhighlighting before each command
 (eval-after-load 'hl-sexp
-  '(defadvice hl-sexp-mode (after unflicker (turn-on) activate)
+  '(defadvice hl-sexp-mode (after unflicker (&optional turn-on) activate)
      (when turn-on
        (remove-hook 'pre-command-hook #'hl-sexp-unhighlight))))
 
@@ -100,12 +101,12 @@
 
 (defun sanityinc/lisp-setup ()
   "Enable features useful in any Lisp mode."
+  (rainbow-delimiters-mode t)
   (enable-paredit-mode)
   (turn-on-eldoc-mode))
 
 (defun sanityinc/emacs-lisp-setup ()
   "Enable features useful when working with elisp."
-  (rainbow-delimiters-mode t)
   (elisp-slime-nav-mode t)
   (set-up-hippie-expand-for-elisp)
   (ac-emacs-lisp-mode-setup)
@@ -122,10 +123,11 @@
     (add-hook hook 'sanityinc/emacs-lisp-setup)))
 
 
+(require-package 'eldoc-eval)
 (require 'eldoc-eval)
 
-(add-to-list 'auto-mode-alist '("\\.emacs-project$" . emacs-lisp-mode))
-(add-to-list 'auto-mode-alist '("archive-contents$" . emacs-lisp-mode))
+(add-to-list 'auto-mode-alist '("\\.emacs-project\\'" . emacs-lisp-mode))
+(add-to-list 'auto-mode-alist '("archive-contents\\'" . emacs-lisp-mode))
 
 (define-key emacs-lisp-mode-map (kbd "C-x C-a") 'pp-macroexpand-last-sexp)
 

@@ -1,6 +1,7 @@
-(require 'auto-complete)
+(require-package 'auto-complete)
 (require 'auto-complete-config)
 (global-auto-complete-mode t)
+(setq ac-expand-on-auto-complete nil)
 (setq ac-auto-start nil)
 (setq ac-dwim nil) ; To get pop-ups with docs even if a word is uniquely completed
 (define-key ac-completing-map (kbd "C-n") 'ac-next)
@@ -19,7 +20,8 @@
 
 
 (set-default 'ac-sources
-             '(ac-source-dictionary
+             '(ac-source-imenu
+               ac-source-dictionary
                ac-source-words-in-buffer
                ac-source-words-in-same-mode-buffers
                ac-source-words-in-all-buffer))
@@ -28,7 +30,7 @@
                 sass-mode yaml-mode csv-mode espresso-mode haskell-mode
                 html-mode nxml-mode sh-mode smarty-mode clojure-mode
                 lisp-mode textile-mode markdown-mode tuareg-mode
-                js3-mode css-mode less-css-mode))
+                js3-mode css-mode less-css-mode sql-mode))
   (add-to-list 'ac-modes mode))
 
 
