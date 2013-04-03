@@ -10,9 +10,6 @@
 (defconst *is-a-mac* (eq system-type 'darwin))
 (defconst *is-carbon-emacs* (eq window-system 'mac))
 (defconst *is-cocoa-emacs* (and *is-a-mac* (eq window-system 'ns)))
-(defconst *win32* (eq system-type 'windows-nt))
-(defconst *cygwin* (eq system-type 'cygwin))
-(defconst *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)))
 
 ;;----------------------------------------------------------------------------
 ;; Bootstrap config

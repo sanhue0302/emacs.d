@@ -162,7 +162,6 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'pretty-mode)
 (require-package 'twittering-mode)
 (require-package 'undo-tree)
-(require-package 'auto-complete-clang)
 (require-package 'cmake-mode)
 
 ;; I maintain this chunk:
