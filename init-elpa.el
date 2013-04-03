@@ -148,7 +148,6 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'clojurescript-mode)
 (require-package 'nrepl)
 (require-package 'diminish)
-(require-package 'autopair)
 (require-package 'js-comint)
 (require-package 'php-mode)
 (require-package 'smarty-mode)
