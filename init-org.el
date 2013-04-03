@@ -101,7 +101,6 @@
      ;;(require 'org-checklist)
      (require 'org-fstree)))
 
-(add-hook 'org-mode-hook 'inhibit-autopair)
 
 ;; Remove empty LOGBOOK drawers on clock out
 (defun remove-empty-drawer-on-clock-out ()
