@@ -13,17 +13,6 @@
 
 
 ;;------------------------------------------------------------------------------
-;; Patch up annoying package.el quirks
-;;------------------------------------------------------------------------------
-
-(defadvice package-generate-autoloads (after close-autoloads (name pkg-dir) activate)
-  "Stop package.el from leaving open autoload files lying around."
-  (let ((path (expand-file-name (concat name "-autoloads.el") pkg-dir)))
-    (with-current-buffer (find-file-existing path)
-      (kill-buffer nil))))
-
-
-;;------------------------------------------------------------------------------
 ;; Add support to package.el for pre-filtering available packages
 ;;------------------------------------------------------------------------------
 
@@ -72,6 +61,8 @@ re-downloaded in order to locate PACKAGE."
 ;; use it.
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
 ;;------------------------------------------------------------------------------
 ;; Also use Melpa for some packages built straight from VC

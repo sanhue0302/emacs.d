@@ -1,4 +1,5 @@
 (require-package 'ruby-mode)
+(require-package 'ruby-hash-syntax)
 (require-package 'flymake-ruby)
 (require-package 'rinari)
 (require-package 'ruby-compilation)
@@ -85,7 +86,13 @@
 ;; (eval-after-load 'mmm-mode
 ;;   '(progn
 ;;      (mmm-add-classes
-;;       '((ruby-heredoc-sql :submode sql-mode :front "<<-?end_sql.*\r?\n" :back "[ \t]*end_sql" :face mmm-code-submode-face)))
+;;       '((ruby-heredoc-sql
+;;          :submode sql-mode
+;;          :front "<<-?[\'\"]?\\(end_sql\\)[\'\"]?"
+;;          :save-matches 1
+;;          :front-offset (end-of-line 1)
+;;          :back "^[ \t]*~1$"
+;;          :delimiter-mode nil)))
 ;;      (mmm-add-mode-ext-class 'ruby-mode "\\.rb\\'" 'ruby-heredoc-sql)))
 
 
@@ -100,22 +107,6 @@
 
 (add-hook 'ruby-mode-hook (lambda () (local-set-key [f6] 'recompile)))
 
-
-;;----------------------------------------------------------------------------
-;; Ruby - handy helpers
-;;----------------------------------------------------------------------------
-
-;; Borrowed from https://github.com/textmate/ruby.tmbundle/blob/master/Commands/Convert%20Ruby%20hash%20to%201_9%20syntax.tmCommand
-(defun sanityinc/ruby-toggle-hash-syntax (beg end)
-  "Toggle between ruby 1.8 and 1.9 hash styles."
-  (interactive "r")
-  (save-excursion
-    (goto-char beg)
-    (cond
-     ((save-excursion (search-forward "=>" end t))
-      (replace-regexp ":\\(\\w+\\) +=> +" "\\1: " nil beg end))
-     ((save-excursion (re-search-forward "\\w+:" end t))
-      (replace-regexp "\\(\\w+\\):\\( *\\(?:\"\\(?:\\\"\\|[^\"]\\)*\"\\|'\\(?:\\'\\|[^']\\)*'\\|\\w+([^)]*)\\|[^,]+\\)\\)" ":\\1 =>\\2" nil beg end)))))
 
 
 (provide 'init-ruby-mode)

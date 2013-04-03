@@ -1,6 +1,9 @@
 (require-package 'unfill)
 (require-package 'whole-line-or-region)
 
+(when (fboundp 'electric-pair-mode)
+  (electric-pair-mode))
+
 ;;----------------------------------------------------------------------------
 ;; Some basic preferences
 ;;----------------------------------------------------------------------------
@@ -156,6 +159,7 @@
 ;;----------------------------------------------------------------------------
 (require-package 'page-break-lines)
 (global-page-break-lines-mode)
+(diminish 'page-break-lines-mode)
 
 ;;----------------------------------------------------------------------------
 ;; Fill column indicator
@@ -168,7 +172,7 @@
       (set (make-local-variable 'whitespace-style) '(face trailing))
       (whitespace-mode 1)))
 
-  (add-hook 'prog-mode-hook 'sanityinc/prog-mode-fci-settings)
+  ;;(add-hook 'prog-mode-hook 'sanityinc/prog-mode-fci-settings)
 
   (defun sanityinc/fci-enabled-p ()
     (and (boundp 'fci-mode) fci-mode))
