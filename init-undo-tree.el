@@ -1,4 +1,4 @@
-(require 'undo-tree)
+(require-package 'undo-tree)
 (global-undo-tree-mode)
 
 ;; Represent undo-history as an actual tree (visualize with C-x u)
