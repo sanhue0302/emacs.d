@@ -6,14 +6,10 @@
 (require-package 'gitconfig-mode)
 (require-package 'yagist)
 
-(setq magit-save-some-buffers nil
-      magit-process-popup-time 10
-      magit-completing-read-function 'magit-ido-completing-read)
-
-(defun magit-status-somedir ()
-  (interactive)
-  (let ((current-prefix-arg t))
-    (magit-status default-directory)))
+(setq-default
+ magit-save-some-buffers nil
+ magit-process-popup-time 10
+ magit-completing-read-function 'magit-ido-completing-read)
 
 (global-set-key (kbd "C-x g g") 'magit-status)
 (global-set-key (kbd "C-x g G") 'magit-status-somedir)
@@ -44,10 +40,8 @@
 
 (eval-after-load 'vc-git
   '(progn
-     (require 'magit-wip)
-     (if (= (magit-git-exit-code "wip" "-h") 0)
-         (global-magit-wip-save-mode)
-       (message "Not enabling magit-wip: git-wip is not installed."))))
+     (global-magit-wip-save-mode)
+     (diminish 'magit-wip-save-mode)))
 
 
 ;;; Use the fringe version of git-gutter
@@ -59,13 +53,13 @@
 (when *is-a-mac*
   (add-hook 'magit-mode-hook (lambda () (local-unset-key [(meta h)]))))
 
+
+;;; git-svn support
+
 (eval-after-load 'magit
   '(progn
      (require 'magit-svn)))
 
-;;----------------------------------------------------------------------------
-;; git-svn conveniences
-;;----------------------------------------------------------------------------
 (eval-after-load 'compile
   '(progn
      (dolist (defn (list '(git-svn-updated "^\t[A-Z]\t\\(.*\\)$" 1 nil nil 0 1)
