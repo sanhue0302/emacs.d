@@ -28,7 +28,8 @@
 (setq org-refile-use-outline-path (quote file))
 ; Targets complete in steps so we start with filename, TAB shows the next level of targets etc
 (setq org-outline-path-complete-in-steps t)
-
+; enable speed-commands, default value define in 'org-speed-commands-default
+(setq org-use-speed-commands t)
 
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
@@ -91,7 +92,6 @@
 
 (eval-after-load 'org
   '(progn
-     (define-key org-mode-map (kbd "C-M-<up>") 'org-up-element)
      (require 'org-exp)
      (require 'org-clock)
      (when *is-a-mac*
