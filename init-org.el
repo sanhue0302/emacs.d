@@ -30,6 +30,8 @@
 (setq org-outline-path-complete-in-steps t)
 ; enable speed-commands, default value define in 'org-speed-commands-default
 (setq org-use-speed-commands t)
+; always hide leading-stars
+(setq org-hide-leading-stars t)
 
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
