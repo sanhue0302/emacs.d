@@ -17,7 +17,7 @@
 (add-auto-mode 'ruby-mode
                "Rakefile\\'" "\\.rake\\'" "\.rxml\\'"
                "\\.rjs\\'" ".irbrc\\'" "\.builder\\'" "\\.ru\\'"
-               "\\.gemspec\\'" "Gemfile\\'" "Kirkfile\\'")
+               "\\.gemspec\\'" "Gemfile\\'" "Kirkfile\\'" "\\.podspec\\'")
 
 
 (autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
