@@ -12,8 +12,8 @@
  magit-process-popup-time 10
  magit-completing-read-function 'magit-ido-completing-read)
 
-(global-set-key (kbd "C-x g g") 'magit-status)
-(global-set-key (kbd "C-x g G") 'magit-status-somedir)
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x G") 'magit-status-somedir)
 
 
 
