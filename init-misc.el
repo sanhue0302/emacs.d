@@ -13,11 +13,5 @@
 
 (setq-default regex-tool-backend 'perl)
 
-(require-package 'sql-indent)
-(eval-after-load "sql"
-  '(load-library "sql-indent"))
-
-;; Register files
-(set-register ?e '(file . "~/.emacs.d/init.el"))
 
 (provide 'init-misc)

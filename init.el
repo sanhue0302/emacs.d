@@ -77,6 +77,7 @@
 (require 'init-ruby-mode)
 (require 'init-rails)
 (require 'init-objc)
+(require 'init-sql)
 
 (require 'init-paredit)
 (require 'init-lisp)
