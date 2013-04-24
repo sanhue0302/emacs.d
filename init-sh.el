@@ -2,6 +2,10 @@
 (add-hook 'sh-set-shell-hook 'flymake-shell-load)
 
 (add-auto-mode 'shell-script-mode "\\.zsh")
+;;; change default shell to zsh
+(defvar local-zsh "/usr/local/bin/zsh")
+(when (file-exists-p local-zsh)
+      (setenv "SHELL" local-zsh))
 
 ;;; http://sakito.jp/emacs/emacsshell.html
 (setq system-uses-terminfo nil)
