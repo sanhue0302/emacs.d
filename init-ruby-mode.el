@@ -7,6 +7,7 @@
 (require-package 'robe)
 (require-package 'yari)
 (require-package 'yaml-mode)
+(require-package 'flymake-yaml)
 (require-package 'haml-mode)
 (require-package 'mmm-mode)
 
@@ -43,7 +44,7 @@
 (add-hook 'robe-mode-hook
           (lambda ()
             (add-to-list 'ac-sources 'ac-source-robe)
-            (setq completion-at-point-functions '(auto-complete))))
+            (set-auto-complete-as-completion-at-point-function)))
 
 
 ;;----------------------------------------------------------------------------
@@ -51,6 +52,7 @@
 ;;----------------------------------------------------------------------------
 (defalias 'ri 'yari)
 
+(add-hook 'yaml-mode-hook 'flymake-yaml-load)
 
 ;;----------------------------------------------------------------------------
 ;; Ruby - erb

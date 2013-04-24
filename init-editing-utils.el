@@ -10,7 +10,7 @@
 (setq-default
  blink-cursor-delay 0
  blink-cursor-interval 0.4
- bookmark-default-file "~/.emacs.d/.bookmarks.el"
+ bookmark-default-file (expand-file-name ".bookmarks.el" user-emacs-directory)
  buffers-menu-max-size 30
  case-fold-search t
  column-number-mode t
@@ -282,6 +282,12 @@
 (require-package 'visual-regexp)
 (global-set-key [remap query-replace-regexp] 'vr/query-replace)
 (global-set-key [remap replace-regexp] 'vr/replace)
+
+
+
+
+(when (executable-find "ag")
+  (require-package 'ag))
 
 
 (provide 'init-editing-utils)
