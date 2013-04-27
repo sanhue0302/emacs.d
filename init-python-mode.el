@@ -16,5 +16,9 @@
 (require-package 'flymake-python-pyflakes)
 (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
+;; python side must install elpy rope pyflakes pep8 [jedi]
+(when (>= emacs-major-version 24)
+  (require-package 'elpy)
+  (elpy-enable))
 
 (provide 'init-python-mode)
