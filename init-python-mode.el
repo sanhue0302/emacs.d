@@ -1,6 +1,7 @@
 
 
 (autoload 'doctest-mode "doctest-mode" "Python doctest editing mode." t)
+(autoload 'python-mode "python-mode" "Python editing mode." t)
 
 (setq auto-mode-alist
       (append '(("SConstruct\\'" . python-mode)
