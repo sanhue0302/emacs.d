@@ -14,6 +14,8 @@
    (dired-toggle-marks)
    (dired-do-kill-lines))
 
-(define-key dired-mode-map (kbd "/") 'dired-show-only)
+(eval-after-load 'dired+
+  '(progn
+     (define-key dired-mode-map (kbd "/") 'dired-show-only)))
 
 (provide 'init-dired)
