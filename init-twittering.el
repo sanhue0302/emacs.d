@@ -7,6 +7,12 @@
 (define-key twittering-mode-map (kbd "C-c f") 'twittering-favorite)
 (define-key twittering-mode-map (kbd "C-c F") 'twittering-unfavorite)
 
+;; rebind hotkey
+(define-key twittering-mode-map (kbd "[") 'twittering-switch-to-previous-timeline)
+(define-key twittering-mode-map (kbd "]") 'twittering-switch-to-next-timeline)
+(define-key twittering-mode-map (kbd "f") 'twittering-other-user-timeline)
+(define-key twittering-mode-map (kbd "b") 'twittering-goto-first-status)
+
 ;; setup hotkey
 (global-set-key (kbd "C-x t") 'twit)
 
