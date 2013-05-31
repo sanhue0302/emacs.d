@@ -13,6 +13,9 @@
 (define-key twittering-mode-map (kbd "f") 'twittering-other-user-timeline)
 (define-key twittering-mode-map (kbd "b") 'twittering-goto-first-status)
 
+;; i-search
+(define-key twittering-mode-map (kbd "s") 'isearch-forward)
+
 ;; setup hotkey
 (global-set-key (kbd "C-x t") 'twit)
 
