@@ -5,7 +5,7 @@
 (add-auto-mode 'ruby-mode
                "Rakefile\\'" "\\.rake\\'" "\\.rxml\\'"
                "\\.rjs\\'" ".irbrc\\'" "\\builder\\'" "\\.ru\\'"
-               "\\.gemspec\\'" "Gemfile\\'" "Kirkfile\\'" "\\.podspec\\'")
+               "\\.gemspec\\'" "Gemfile\\'" "Kirkfile\\'")
 
 (setq ruby-use-encoding-map nil)
 
@@ -125,6 +125,9 @@
 
 ;(add-to-list 'mmm-set-file-name-for-modes 'ruby-mode)
 
+;;; Cococapods
+(add-auto-mode 'ruby-mode
+               "Podfile\\'" "\\.podspec\\'")
 
 
 (provide 'init-ruby-mode)
