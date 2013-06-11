@@ -53,7 +53,6 @@
 (require 'init-fonts)
 (require 'init-mmm)
 (require 'init-growl)
-(require 'init-undo-tree)
 (require 'init-twittering)
 
 (require 'init-editing-utils)
