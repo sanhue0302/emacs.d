@@ -6,7 +6,7 @@
    (dired-toggle-marks)
    (dired-do-kill-lines))
 
-(eval-after-load 'dired
+(after-load 'dired
   '(progn
      (require 'dired+)
      (setq dired-recursive-deletes 'top)
