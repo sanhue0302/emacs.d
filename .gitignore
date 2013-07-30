@@ -23,3 +23,5 @@ site-lisp/package/
 /.mc-lists.el
 /var
 /.bookmarks.el
+/.sqli_history
+/frame-restore-parameters

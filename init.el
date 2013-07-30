@@ -9,7 +9,6 @@
 ;;----------------------------------------------------------------------------
 (defconst *spell-check-support-enabled* nil)
 (defconst *is-a-mac* (eq system-type 'darwin))
-(defconst *is-carbon-emacs* (eq window-system 'mac))
 (defconst *is-cocoa-emacs* (and *is-a-mac* (eq window-system 'ns)))
 
 ;;----------------------------------------------------------------------------
@@ -42,7 +41,7 @@
 (require 'init-isearch)
 (require 'init-uniquify)
 (require 'init-ibuffer)
-(require 'init-flymake)
+(require 'init-flycheck)
 
 (require 'init-recentf)
 (require 'init-ido)
@@ -66,7 +65,6 @@
 (require 'init-csv)
 (require 'init-erlang)
 (require 'init-javascript)
-(require 'init-sh)
 (require 'init-php)
 (require 'init-org)
 (require 'init-nxml)
@@ -129,6 +127,8 @@
 ;;----------------------------------------------------------------------------
 (require 'init-locales)
 
+(message "init completed in %.2fms"
+         (sanityinc/time-subtract-millis (current-time) before-init-time))
 
 ;; Local Variables:
 ;; coding: utf-8
