@@ -69,6 +69,8 @@
 (require 'init-ruby-mode)
 (require 'init-rails)
 (require 'init-sql)
+(require 'init-eshell)
+(require 'init-zsh)
 
 (require 'init-paredit)
 (require 'init-lisp)

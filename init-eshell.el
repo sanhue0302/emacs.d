@@ -32,4 +32,4 @@
 ;;; Change default mail to "C-x M"
 (global-set-key (kbd "C-x M") 'compose-mail)
 
-(provide 'init-sh)
+(provide 'init-eshell)
