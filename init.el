@@ -76,6 +76,8 @@
 (require 'init-rails)
 (require 'init-objc)
 (require 'init-sql)
+(require 'init-eshell)
+(require 'init-zsh)
 
 (require 'init-paredit)
 (require 'init-lisp)
