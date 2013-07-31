@@ -12,9 +12,6 @@
  magit-completing-read-function 'magit-ido-completing-read)
 
 (global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x G") 'magit-status-somedir)
-
-
 
 (after-load 'magit
   ;; Don't let magit-status mess up window configurations
