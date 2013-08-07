@@ -47,12 +47,12 @@
 (setq org-clock-persist t)
 (setq org-clock-in-resume t)
 
-;; Change task state to STARTED when clocking in
-(setq org-clock-in-switch-to-state "STARTED")
 ;; Save clock data and notes in the LOGBOOK drawer
 (setq org-clock-into-drawer t)
 ;; Removes clocked tasks with 0:00 duration
 (setq org-clock-out-remove-zero-time-clocks t)
+;; while minutes lass than 2, don't log
+(setq org-clock-rounding-minutes 2)
 
 ;; Show the clocked-in task - if any - in the header line
 (defun sanityinc/show-org-clock-in-header-line ()
