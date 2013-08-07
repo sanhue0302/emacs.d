@@ -52,7 +52,6 @@
 (require 'init-fonts)
 (require 'init-mmm)
 (require 'init-growl)
-(require 'init-twittering)
 
 (require 'init-editing-utils)
 
