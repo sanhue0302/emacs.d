@@ -22,7 +22,7 @@
                (sanityinc/time-subtract-millis (current-time)
                                                start-time)
                (when filename
-		 (abbreviate-file-name filename))))))
+                 (abbreviate-file-name filename))))))
 
 ;;----------------------------------------------------------------------------
 ;; Restore histories and registers after saving
@@ -57,7 +57,7 @@
 (when (eval-when-compile (>= emacs-major-version 24))
   (unless (boundp 'desktop-restore-frames)
     (require-package 'frame-restore)
-    (frame-restore)))
+    (desktop-save-mode)))
 
 
 (provide 'init-sessions)
