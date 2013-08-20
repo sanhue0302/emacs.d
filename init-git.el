@@ -2,6 +2,7 @@
 (require-package 'git-gutter-fringe)
 (require-package 'git-blame)
 (require-package 'git-commit-mode)
+(require-package 'git-rebase-mode)
 (require-package 'gitignore-mode)
 (require-package 'gitconfig-mode)
 
@@ -89,8 +90,8 @@
 
 (require-package 'yagist)
 (require-package 'github-browse-file)
-(require-package 'bug-reference-github)
-(add-hook 'prog-mode-hook 'bug-reference-prog-mode)
+;(require-package 'bug-reference-github)
+;(add-hook 'prog-mode-hook 'bug-reference-prog-mode)
 
 
 
