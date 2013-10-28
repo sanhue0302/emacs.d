@@ -7,6 +7,9 @@
 (require-package 'pretty-mode)
 (autoload 'turn-on-pretty-mode "pretty-mode")
 
+(setq-default initial-scratch-message
+              (concat ";; Happy hacking " (or user-login-name "") "!\n\n"))
+
 ;; ----------------------------------------------------------------------------
 ;; Hippie-expand
 ;; ----------------------------------------------------------------------------
@@ -110,6 +113,8 @@
 (define-key emacs-lisp-mode-map (kbd "C-x C-a") 'pp-macroexpand-last-sexp)
 (define-key emacs-lisp-mode-map (kbd "C-x C-e") 'pp-eval-last-sexp)
 
+(require-package 'cl-lib-highlight)
+(cl-lib-highlight-initialize)
 
 ;; ----------------------------------------------------------------------------
 ;; Delete .elc files when reverting the .el from VC or magit

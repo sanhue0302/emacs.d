@@ -41,13 +41,22 @@
       auto-revert-verbose nil)
 
 ;; But don't show trailing whitespace in SQLi, inf-ruby etc.
-(dolist (hook '(term-mode-hook comint-mode-hook compilation-mode-hook))
+(dolist (hook '(term-mode-hook comint-mode-hook compilation-mode-hook twittering-mode-hook))
   (add-hook hook
             (lambda () (setq show-trailing-whitespace nil))))
+
+
+(require-package 'whitespace-cleanup-mode)
+(global-whitespace-cleanup-mode t)
 
 (transient-mark-mode t)
 
 (global-set-key (kbd "RET") 'newline-and-indent)
+
+(when (eval-when-compile (string< "24.3.1" emacs-version))
+  ;; https://github.com/purcell/emacs.d/issues/138
+  (after-load 'subword
+    (diminish 'subword-mode)))
 
 
 (require-package 'undo-tree)
@@ -78,19 +87,6 @@
 ;;----------------------------------------------------------------------------
 (require-package 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
-
-
-;;----------------------------------------------------------------------------
-;; Fix per-window memory of buffer point positions
-;;----------------------------------------------------------------------------
-(require-package 'pointback)
-(global-pointback-mode)
-(after-load 'skeleton
-  (defadvice skeleton-insert (before disable-pointback activate)
-    "Disable pointback when using skeleton functions like `sgml-tag'."
-    (when pointback-mode
-      (message "Disabling pointback.")
-      (pointback-mode -1))))
 
 
 ;;----------------------------------------------------------------------------
@@ -292,7 +288,7 @@ With arg N, insert N newlines."
     (end-of-line)
     (indent-according-to-mode)))
 
-(global-set-key [remap open-line] 'sanityinc/open-line-with-reindent)
+(global-set-key (kbd "C-o") 'sanityinc/open-line-with-reindent)
 
 
 ;;----------------------------------------------------------------------------
