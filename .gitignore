@@ -25,3 +25,4 @@ site-lisp/package/
 /.bookmarks.el
 /.sqli_history
 /frame-restore-parameters
+/.lastWindowsSize

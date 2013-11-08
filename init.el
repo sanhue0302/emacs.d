@@ -86,6 +86,7 @@
 (require 'init-marmalade)
 (require 'init-misc)
 (require 'init-client)
+(require 'init-frame)
 
 ;; Extra packages which don't require any configuration
 
