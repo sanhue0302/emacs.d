@@ -22,7 +22,8 @@ site-lisp/package/
 /swank
 /.mc-lists.el
 /var
-/.bookmarks.el
 /.sqli_history
 /frame-restore-parameters
+/.achievements
+/.bookmarks.el
 /.lastWindowsSize
