@@ -1,3 +1,7 @@
+;;; start edit-server
+(require 'edit-server)
+(edit-server-start)
+
 ;; kill this buffer, also can kill client
 (add-hook 'server-switch-hook
           (lambda ()
