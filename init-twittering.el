@@ -1,4 +1,4 @@
-(require 'twittering-mode)
+(require-package 'twittering-mode)
 
 ;; Avoid to setup password each times
 (setq twittering-use-master-password t)
