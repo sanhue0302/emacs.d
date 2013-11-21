@@ -12,6 +12,7 @@
     `(propertize ,str 'face (list ,@properties)))
 
 (defun shk-eshell-prompt ()
+  "Setup eshell prompt to `user@hostname ~ (git-branch) $', when user is root change $ to #"
   (concat
    user-login-name "@" system-name " "
    (abbreviate-file-name
