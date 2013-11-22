@@ -41,7 +41,9 @@
         ))))
 
 ;; Make eshell prompt more colorful
-(add-to-list 'eshell-output-filter-functions 'colorfy-eshell-prompt)
+(require 'eshell)
+(eval-after-load 'eshell
+  '(add-to-list 'eshell-output-filter-functions 'colorfy-eshell-prompt))
 
 ;;; Start eshell or switch to it if it's active.
 (global-set-key (kbd "C-x m") 'eshell)
