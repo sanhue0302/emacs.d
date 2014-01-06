@@ -16,8 +16,6 @@
 ;; quickly open magit on any one of your projects.
 (global-set-key (kbd "C-x g") 'magit-status)
 
-(require-package 'fullframe)
-(fullframe magit-status magit-mode-quit-window :magit-fullscreen nil)
 
 
 ;;; When we start working on git-backed files, use git-wip if available
