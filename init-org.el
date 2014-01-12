@@ -56,6 +56,73 @@
               ("CANCELLED" :foreground "brown" :weight bold)
               ("MEETING" :foreground "forest green" :weight bold))))
 
+(setq org-tag-alist '((:startgroup)
+                     ("@Office" . ?o)
+                     ("@Home" . ?h)
+                     ("@Computer" . ?c)
+                     (:endgroup)
+
+                     ("@Reading" . ?r)
+                     (:grouptags)
+                     ("@Reading_book" . nil)
+                     ("@Reading_web" . nil)
+
+                     (:endgroup)
+                     ("@Gaming" . ?g)
+                     ("@Watching")))
+
+(setq org-capture-templates
+      '(("i" "Idea has to catch up" entry
+         (file+headline "~/org/refile.org" "Idea")
+         "")
+        ("t" "Todo sometings" entry
+         (file+headline "~/org/refile.org" "Tasks")
+         "* TODO %?")
+        ("n" "Note about anything" entry
+         (file+headline "~/org/refile.org" "Note")
+         "")
+        ("r" "Something to reading or learning" entry
+         (file+headline "~/org/refile.org" "Idea")
+         "* Reading %? :@Reading:")
+        ("m" "Meeting with somebody" entry
+         (file+headline "~/org/refile.org" "Meeting")
+         "* MEETING with %? ")
+        ("j" "Interruption" entry
+         (file+headline "~/org/refile.org" "Interruption")
+         "")))
+
+(setq org-agenda-custom-commands
+      '(("k" "Use org-capture capture somethings" org-capture "" nil)
+        ("d" "Daily action list" agenda ""
+         ((org-agenda-ndays 1)
+          (org-agenda-sorting-strategy
+           (quote (time-up priority-down tag-up)))
+          (org-deadline-warning-days 0)))
+        ("n" "Next Actions" todo "NEXT" nil)
+        ("h" "List all special tags at agenda files"
+         ((agenda "" nil)
+          (tags-todo "-CANCELLED/!NEXT"
+                     ((org-agenda-overriding-header "Next Tasks")
+                      (org-agenda-skip-function t)
+                      (org-tags-match-list-sublevels t)
+                      (org-agenda-todo-ignore-scheduled t)
+                      (org-agenda-todo-ignore-deadlines t)
+                      (org-agenda-todo-ignore-with-date t)
+                      (org-agenda-sorting-strategy
+                       '(priority-down todo-state-down effort-up category-keep))))
+          (tags-todo "@Office/-DONE"
+                     ((org-agenda-overriding-header "List TODO with @Office")))
+          (tags-todo "@Home/-DONE"
+                     ((org-agenda-overriding-header "List TODO with @Home")))
+          (tags-todo "@Reading/-DONE"
+                     ((org-agenda-overriding-header "List TODO with @Reading")))
+          (tags-todo "@Computer/-DONE"
+                     ((org-agenda-overriding-header "List TODO with @Computer")))
+          (tags-todo "@Watching/-DONE"
+                     ((org-agenda-overriding-header "List TODO with @Watching")))
+          (tags-todo "@Gaming/-DONE"
+                     ((org-agenda-overriding-header "List TODO with @Gaming"))))
+         ((org-agenda-sorting-strategy '(priority-up effort-down))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org clock
