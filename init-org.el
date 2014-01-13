@@ -84,6 +84,9 @@
         ("r" "Something to reading or learning" entry
          (file+headline "~/org/refile.org" "Idea")
          "* Reading %? :@Reading:")
+        ("w" "Watching something" entry
+         (file+headline "~/org/refile.org" "Idea")
+         "* 看 %? :@Watching:")
         ("m" "Meeting with somebody" entry
          (file+headline "~/org/refile.org" "Meeting")
          "* MEETING with %? ")
