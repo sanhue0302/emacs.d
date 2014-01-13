@@ -69,7 +69,7 @@
 
                      (:endgroup)
                      ("@Gaming" . ?g)
-                     ("@Watching")))
+                     ("@Watching" . ?w)))
 
 (setq org-capture-templates
       '(("i" "Idea has to catch up" entry
@@ -98,8 +98,7 @@
           (org-agenda-sorting-strategy
            (quote (time-up priority-down tag-up)))
           (org-deadline-warning-days 0)))
-        ("n" "Next Actions" todo "NEXT" nil)
-        ("h" "List all special tags at agenda files"
+        ("H" "List all special tags at agenda files"
          ((agenda "" nil)
           (tags-todo "-CANCELLED/!NEXT"
                      ((org-agenda-overriding-header "Next Tasks")
@@ -122,7 +121,18 @@
                      ((org-agenda-overriding-header "List TODO with @Watching")))
           (tags-todo "@Gaming/-DONE"
                      ((org-agenda-overriding-header "List TODO with @Gaming"))))
-         ((org-agenda-sorting-strategy '(priority-up effort-down))))))
+         ((org-agenda-sorting-strategy '(priority-up effort-down))))
+        ("n" "Next Actions" todo "NEXT" nil)
+        ("r" "Tasks to Refile" todo "TODO"
+         ((org-agenda-files (quote ("~/org/refile.org")))))
+        ("h" . "GTD contexts")
+        ("ho" "Office" tags-todo "@Office")
+        ("hh" "Home" tags-todo "@Home")
+        ("hc" "Computer" tags-todo "@Computer")
+        ("hr" "Reading" tags-todo "@Reading")
+        ("hw" "Watching" tags-todo "@Watching")
+        ("hg" "Gaming" tags-todo "@Gaming")
+        ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org clock
