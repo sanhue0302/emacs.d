@@ -72,70 +72,69 @@
                      ("@Watching" . ?w)))
 
 (setq org-capture-templates
-      '(("i" "Idea has to catch up" entry
-         (file+headline "~/org/refile.org" "Idea")
-         "")
-        ("t" "Todo sometings" entry
-         (file+headline "~/org/refile.org" "Tasks")
-         "* TODO %?")
-        ("n" "Note about anything" entry
-         (file+headline "~/org/refile.org" "Note")
-         "")
-        ("r" "Something to reading or learning" entry
-         (file+headline "~/org/refile.org" "Idea")
-         "* Reading %? :@Reading:")
-        ("w" "Watching something" entry
-         (file+headline "~/org/refile.org" "Idea")
-         "* 看 %? :@Watching:")
-        ("m" "Meeting with somebody" entry
-         (file+headline "~/org/refile.org" "Meeting")
-         "* MEETING with %? ")
-        ("j" "Interruption" entry
-         (file+headline "~/org/refile.org" "Interruption")
-         "")))
+      (quote (("i" "Idea has to catch up" entry
+               (file+headline "~/org/refile.org" "Idea")
+               "")
+              ("t" "Todo sometings" entry
+               (file+headline "~/org/refile.org" "Tasks")
+               "* TODO %?")
+              ("n" "Note about anything" entry
+               (file+headline "~/org/refile.org" "Note")
+               "")
+              ("r" "Something to reading or learning" entry
+               (file+headline "~/org/refile.org" "Idea")
+               "* Reading %? :@Reading:")
+              ("w" "Watching something" entry
+               (file+headline "~/org/refile.org" "Idea")
+               "* 看 %? :@Watching:")
+              ("m" "Meeting with somebody" entry
+               (file+headline "~/org/refile.org" "Meeting")
+               "* MEETING with %? ")
+              ("j" "Interruption" entry
+               (file+headline "~/org/refile.org" "Interruption")
+               ""))))
 
 (setq org-agenda-custom-commands
-      '(("k" "Use org-capture capture somethings" org-capture "" nil)
-        ("d" "Daily action list" agenda ""
-         ((org-agenda-ndays 1)
-          (org-agenda-sorting-strategy
-           (quote (time-up priority-down tag-up)))
-          (org-deadline-warning-days 0)))
-        ("H" "List all special tags at agenda files"
-         ((agenda "" nil)
-          (tags-todo "-CANCELLED/!NEXT"
-                     ((org-agenda-overriding-header "Next Tasks")
-                      (org-agenda-skip-function t)
-                      (org-tags-match-list-sublevels t)
-                      (org-agenda-todo-ignore-scheduled t)
-                      (org-agenda-todo-ignore-deadlines t)
-                      (org-agenda-todo-ignore-with-date t)
-                      (org-agenda-sorting-strategy
-                       '(priority-down todo-state-down effort-up category-keep))))
-          (tags-todo "@Office/-DONE"
-                     ((org-agenda-overriding-header "List TODO with @Office")))
-          (tags-todo "@Home/-DONE"
-                     ((org-agenda-overriding-header "List TODO with @Home")))
-          (tags-todo "@Reading/-DONE"
-                     ((org-agenda-overriding-header "List TODO with @Reading")))
-          (tags-todo "@Computer/-DONE"
-                     ((org-agenda-overriding-header "List TODO with @Computer")))
-          (tags-todo "@Watching/-DONE"
-                     ((org-agenda-overriding-header "List TODO with @Watching")))
-          (tags-todo "@Gaming/-DONE"
-                     ((org-agenda-overriding-header "List TODO with @Gaming"))))
-         ((org-agenda-sorting-strategy '(priority-up effort-down))))
-        ("n" "Next Actions" todo "NEXT" nil)
-        ("r" "Tasks to Refile" todo "TODO"
-         ((org-agenda-files (quote ("~/org/refile.org")))))
-        ("h" . "GTD contexts")
-        ("ho" "Office" tags-todo "@Office")
-        ("hh" "Home" tags-todo "@Home")
-        ("hc" "Computer" tags-todo "@Computer")
-        ("hr" "Reading" tags-todo "@Reading")
-        ("hw" "Watching" tags-todo "@Watching")
-        ("hg" "Gaming" tags-todo "@Gaming")
-        ))
+      (quote (("k" "Use org-capture capture somethings" org-capture "" nil)
+              ("d" "Daily action list" agenda ""
+               ((org-agenda-ndays 1)
+                (org-agenda-sorting-strategy
+                 (quote (time-up priority-down tag-up)))
+                (org-deadline-warning-days 0)))
+              ("H" "List all special tags at agenda files"
+               ((agenda "" nil)
+                (tags-todo "-CANCELLED/!NEXT"
+                           ((org-agenda-overriding-header "Next Tasks")
+                            (org-agenda-skip-function t)
+                            (org-tags-match-list-sublevels t)
+                            (org-agenda-todo-ignore-scheduled t)
+                            (org-agenda-todo-ignore-deadlines t)
+                            (org-agenda-todo-ignore-with-date t)
+                            (org-agenda-sorting-strategy
+                             '(priority-down todo-state-down effort-up category-keep))))
+                (tags-todo "@Office/-DONE"
+                           ((org-agenda-overriding-header "List TODO with @Office")))
+                (tags-todo "@Home/-DONE"
+                           ((org-agenda-overriding-header "List TODO with @Home")))
+                (tags-todo "@Reading/-DONE"
+                           ((org-agenda-overriding-header "List TODO with @Reading")))
+                (tags-todo "@Computer/-DONE"
+                           ((org-agenda-overriding-header "List TODO with @Computer")))
+                (tags-todo "@Watching/-DONE"
+                           ((org-agenda-overriding-header "List TODO with @Watching")))
+                (tags-todo "@Gaming/-DONE"
+                           ((org-agenda-overriding-header "List TODO with @Gaming"))))
+               ((org-agenda-sorting-strategy '(priority-up effort-down))))
+              ("h" . "GTD contexts")
+              ("ho" "Office" tags-todo "@Office")
+              ("hh" "Home" tags-todo "@Home")
+              ("hc" "Computer" tags-todo "@Computer")
+              ("hr" "Reading" tags-todo "@Reading")
+              ("hw" "Watching" tags-todo "@Watching")
+              ("hg" "Gaming" tags-todo "@Gaming")
+              ("r" "Tasks to Refile" todo "TODO"
+               ((org-agenda-files (quote ("~/org/refile.org")))))
+              ("n" "Next Actions" todo "NEXT" nil))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org clock
