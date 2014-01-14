@@ -116,7 +116,7 @@
                            ((org-agenda-overriding-header "List TODO with @Office")))
                 (tags-todo "@Home/-DONE"
                            ((org-agenda-overriding-header "List TODO with @Home")))
-                (tags-todo "@Reading/-DONE"
+                (tags-todo "@Reading|@Reading_web|@Reading_book/-DONE"
                            ((org-agenda-overriding-header "List TODO with @Reading")))
                 (tags-todo "@Computer/-DONE"
                            ((org-agenda-overriding-header "List TODO with @Computer")))
@@ -129,7 +129,7 @@
               ("ho" "Office" tags-todo "@Office")
               ("hh" "Home" tags-todo "@Home")
               ("hc" "Computer" tags-todo "@Computer")
-              ("hr" "Reading" tags-todo "@Reading")
+              ("hr" "Reading" tags-todo "@Reading|@Reading_web|@Reading_book")
               ("hw" "Watching" tags-todo "@Watching")
               ("hg" "Gaming" tags-todo "@Gaming")
               ("r" "Tasks to Refile" todo "TODO"
