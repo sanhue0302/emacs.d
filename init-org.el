@@ -169,7 +169,7 @@
   (define-key org-clock-mode-line-map [header-line mouse-2] 'org-clock-goto)
   (define-key org-clock-mode-line-map [header-line mouse-1] 'org-clock-menu))
 
-(require 'calfw)
+(require-package 'calfw)
 (require 'calfw-org)
 
 (after-load 'org

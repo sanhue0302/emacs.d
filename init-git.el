@@ -81,6 +81,6 @@
 (require-package 'bug-reference-github)
 (add-hook 'prog-mode-hook 'bug-reference-prog-mode)
 
-
+(require-package 'org-magit)
 
 (provide 'init-git)

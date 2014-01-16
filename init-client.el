@@ -1,5 +1,5 @@
 ;;; start edit-server
-(require 'edit-server)
+(require-package 'edit-server)
 (edit-server-start)
 
 ;; kill this buffer, also can kill client

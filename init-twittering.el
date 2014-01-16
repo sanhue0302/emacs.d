@@ -1,3 +1,4 @@
+(require-package 'twittering-mode)
 (require 'twittering-mode)
 
 ;; Avoid to setup password each times
