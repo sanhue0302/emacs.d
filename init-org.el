@@ -132,7 +132,7 @@
               ("hr" "Reading" tags-todo "@Reading|@Reading_web|@Reading_book")
               ("hw" "Watching" tags-todo "@Watching")
               ("hg" "Gaming" tags-todo "@Gaming")
-              ("r" "Tasks to Refile" todo "TODO"
+              ("r" "Tasks to Refile" tags "@Reading|@Reading_web|@Reading_book|@Office|@Home|@Computer|Watching|@Gaming"
                ((org-agenda-files (quote ("~/org/refile.org")))
                 (org-agenda-overriding-header "List all from refile.org")))
               ("n" "Next Actions" todo "NEXT" nil))))
