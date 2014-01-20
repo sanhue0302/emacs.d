@@ -112,17 +112,17 @@
                             (org-agenda-todo-ignore-with-date t)
                             (org-agenda-sorting-strategy
                              '(priority-down todo-state-down effort-up category-keep))))
-                (tags-todo "@Office/-DONE"
+                (tags-todo "@Office/-DONE-NEXT"
                            ((org-agenda-overriding-header "List TODO with @Office")))
-                (tags-todo "@Home/-DONE"
+                (tags-todo "@Home/-DONE-NEXT"
                            ((org-agenda-overriding-header "List TODO with @Home")))
-                (tags-todo "@Reading|@Reading_web|@Reading_book/-DONE"
+                (tags-todo "@Reading|@Reading_web|@Reading_book/-DONE-NEXT"
                            ((org-agenda-overriding-header "List TODO with @Reading")))
-                (tags-todo "@Computer/-DONE"
+                (tags-todo "@Computer/-DONE-NEXT"
                            ((org-agenda-overriding-header "List TODO with @Computer")))
-                (tags-todo "@Watching/-DONE"
+                (tags-todo "@Watching/-DONE-NEXT"
                            ((org-agenda-overriding-header "List TODO with @Watching")))
-                (tags-todo "@Gaming/-DONE"
+                (tags-todo "@Gaming/-DONE-NEXT"
                            ((org-agenda-overriding-header "List TODO with @Gaming"))))
                ((org-agenda-sorting-strategy '(priority-up effort-down))))
               ("h" . "GTD contexts")
