@@ -101,7 +101,7 @@
                 (org-agenda-sorting-strategy
                  (quote (time-up priority-down tag-up)))
                 (org-deadline-warning-days 0)))
-              ("H" "List all special tags at agenda files"
+              (" " "List all special tags at agenda files"
                ((agenda "" nil)
                 (tags-todo "-CANCELLED/!NEXT"
                            ((org-agenda-overriding-header "Next Tasks")
@@ -130,7 +130,7 @@
               ("hh" "Home" tags-todo "@Home")
               ("hc" "Computer" tags-todo "@Computer")
               ("hr" "Reading" tags-todo "@Reading|@Reading_web|@Reading_book")
-              ("hw" "Watching" tags-todo "@Watching")
+              ("hw" "Watching" search "@Watching")
               ("hg" "Gaming" tags-todo "@Gaming")
               ("r" "Tasks to Refile" tags "@Reading|@Reading_web|@Reading_book|@Office|@Home|@Computer|Watching|@Gaming"
                ((org-agenda-files (quote ("~/org/refile.org")))
